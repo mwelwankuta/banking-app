@@ -1,0 +1,45 @@
+input,
+select,
+button,
+a {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(219, 219, 219);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(252, 252, 252);
+}
+
+::-webkit-scrollbar-track:hover {
+  background: rgb(236, 236, 236);
+}
+
+html{
+  height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color:'red';
+}
+
+* {
+  scroll-behavior: smooth;
+}
+/* disable zoom and highlighting on mobile devices : FIX later */
+@media only screen and (max-with: 861px) {
+  p,
+  h1,
+  h2,
+  a {
+    user-select: none;
+  }
+}
