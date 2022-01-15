@@ -31,7 +31,7 @@ function AllTransactions() {
 
       {data && (
         <Fragment>
-          {data.length === 0 && (
+          {data.transactions.length === 0 && (
             <div>
               <p className='text-center mt-10 font-medium text-gray-600'>
                 no previous transactions

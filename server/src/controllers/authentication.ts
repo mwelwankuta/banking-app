@@ -93,5 +93,5 @@ export async function Register(req: Request, res: Response): Promise<void> {
     account: accNumber,
   }); // balance
 
-  res.send({message: 'registered successfully created', email: body.email});
+  res.send({message: 'registered user', email: body.email});
 }

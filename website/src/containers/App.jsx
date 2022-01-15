@@ -11,17 +11,17 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Nav from '../components/Nav';
 import BottomTabs from '../components/BottomTabs';
 import Container from '../components/Container';
+import LoadingIndicator from '../ui/LoadingIndicator';
 
 import { ROUTES } from '../constants';
 import { userContext } from '../context/user';
 import { User } from '../apis/authentication';
 
-const Login = lazy(() => import('./Login'));
-const Register = lazy(() => import('./Register'));
-
 const Home = lazy(() => import('./Home'));
 const Transactions = lazy(() => import('./Transactions'));
 const AllTransactions = lazy(() => import('./AllTransactions'));
+const Login = lazy(() => import('./Login'));
+const Register = lazy(() => import('./Register'));
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -53,7 +53,7 @@ function App() {
   if (loading) {
     return (
       <Container className='flex items-center justify-center h-screen'>
-        <div className='p-2 rounded-full border-2 border-blue-600 border-t-0 animate-spin'></div>
+        <LoadingIndicator color='blue-200' gap='blue' />
       </Container>
     );
   }

@@ -6,8 +6,17 @@ function UserProvider({ children }) {
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState({ name: '' });
   const [step, setStep] = useState(0);
+
+  const clear = () => {
+    setFirstname('');
+    setLastname('');
+    setEmail('');
+    setPassword('');
+    setImage({ name: '' });
+    setStep(0);
+  };
 
   const registerValues = {
     firstname,
@@ -22,6 +31,7 @@ function UserProvider({ children }) {
     setImage,
     step,
     setStep,
+    clear,
   };
 
   return (

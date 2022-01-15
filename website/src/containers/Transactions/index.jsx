@@ -1,4 +1,3 @@
-import { CashIcon } from '@heroicons/react/solid';
 import React, { useContext, useEffect, useState } from 'react';
 
 import Container from '../../components/Container';
@@ -7,12 +6,14 @@ import TextField from '../../ui/TextField';
 import { Send } from '../../apis/transactions';
 import { userContext } from '../../context/user';
 import { ROUTES } from '../../constants';
+import LoadingIndicator from '../../ui/LoadingIndicator';
 
 function Transactions({ history }) {
   const [amount, setAmount] = useState(0);
   const [receiver, setReceiver] = useState('');
 
-  const [submitting, setSubmitting] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setErrors] = useState('');
 
   const [message, setMessage] = useState('');
@@ -41,7 +42,7 @@ function Transactions({ history }) {
       }, 3000);
       console.log(response);
     } catch (error) {
-      console.log(error, 'error');
+      setMessage(error.message);
     }
     setSubmitting(false);
   };
@@ -59,10 +60,10 @@ function Transactions({ history }) {
   };
 
   useEffect(() => {
-    if (receiver.length === 12 && amount) {
-      setSubmitting(false);
+    if (receiver.length === 12 && amount > 0) {
+      setLoading(false);
     } else {
-      setSubmitting(true);
+      setLoading(true);
     }
   }, [amount, receiver.length]);
 
@@ -99,12 +100,15 @@ function Transactions({ history }) {
           </label>
         </div>
         <button
-          disabled={submitting}
-          className='mt-2 px-4 py-1.5 rounded-md flex items-center w-full justify-center text-white bg-pink-600'
-          style={{ opacity: submitting ? 0.5 : 1 }}
+          disabled={loading}
+          className='mt-2 px-4 py-1.5 rounded-md flex items-center w-full h-8 justify-center text-white bg-pink-800'
+          style={{ opacity: loading ? 0.5 : 1 }}
         >
-          <p className='mr-2'>Send</p>
-          <CashIcon height={20} />
+          {submitting ? (
+            <LoadingIndicator color='white' />
+          ) : (
+            <p className='mr-2'>Send</p>
+          )}
         </button>
       </form>
       {message && transactionId && (
